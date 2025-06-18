@@ -5,10 +5,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-use App\Http\Controllers\PizzaController;
-
 Route::get('/', function () {
     return Inertia::render('Welcome');
 });
 
 Route::get('/pizzas', [PizzaController::class, 'index']);
+
