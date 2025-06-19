@@ -1,5 +1,33 @@
+import { router } from '@inertiajs/react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const PizzaList = ({ pizzas }) => {
+
+  //Így a state-ben nyomon lehet követni (nem változás esetén is) az egyes pizzákhoz tartozó mennyiséget és méretet
+  const [sizes, setSizes] = useState({});
+  const [quantities, setQuantities] = useState({});
+
+  const handleAddToCart = async (e, pizzaID) => {
+      e.preventDefault();
+
+      //Az adott pizza ID-hoz tartozó érték
+      const quantity = quantities[pizzaID] || 1;
+      const size = sizes[pizzaID] || "24";
+
+      try {
+        const response = await axios.post('/add-to-cart',  {
+           quantity, 
+           size, 
+           pizzaID
+        });
+
+        console.log(response)
+      }
+      catch(error) {
+        console.log("Error: " + error);
+      }
+  };
 
   return (
     <div className="p-4">
@@ -33,13 +61,43 @@ const PizzaList = ({ pizzas }) => {
               </div>
 
               <div className="container p-0 d-flex gap-3 justify-content-end">
-                <input type="number" id="quantity_{pizza.id}" className="form-control" value="0" />
-                <select id="size_{pizza.id}" className="form-control">
+                <div className="d-flex gap-3 align-items-center">
+                  <button className="btn btn-dark"
+                    onClick={() => {
+                      if((quantities[pizza.id] || 0) > 0) {
+                        setQuantities({ ...quantities, [pizza.id]: 
+                          quantities[pizza.id] - 1
+                        })
+                      }
+                    }}
+                  >
+                  <i className="fa fa-minus"></i>
+                  </button>
+                  <p className="text-dark p-0 m-0">{quantities[pizza.id] || 0}</p>
+                  <button className="btn btn-dark"
+                    onClick={() => {
+                      setQuantities({ ...quantities, [pizza.id]: 
+                        quantities[pizza.id] + 1 || 1
+                      })
+                    }}
+                  >
+                  <i className="fa fa-plus"></i>
+                  </button>
+                </div>
+                <select value={sizes[pizza.id] || "24"} onChange={(e) => setSizes({ ...sizes, [pizza.id]: e.target.value})} className="form-control">
                   <option value="24">24"</option>
                   <option value="32">32"</option>
                   <option value="64">64"</option>
                 </select>
-                <button className="btn btn-dark d-flex align-items-center gap-2"><i className="fa fa-cart-shopping"></i> Kosárba</button>
+                <button 
+                  className="btn btn-dark d-flex align-items-center gap-2"
+                  data-id={pizza.id}
+                  onClick={(e) => {
+                    handleAddToCart(e, e.currentTarget.dataset.id);
+                  }}
+                >
+                  <i className="fa fa-cart-shopping"></i> Kosárba
+                </button>
               </div>
             </div>
           </div>
