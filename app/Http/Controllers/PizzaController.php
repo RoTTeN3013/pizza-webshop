@@ -52,7 +52,7 @@ class PizzaController extends Controller
                 $query->where('keywords', 'like', '%' . $keywords . '%');
             }
 
-            $pizzas = $query->get();
+            $pizzas = $query->paginate(5);
         
         return Inertia::render('Pizzas', [
             'pizzas'            => $pizzas,

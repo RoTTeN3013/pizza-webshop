@@ -2,6 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import PizzaList from '../Components/PizzaList';
+import PageTitle from '../Components/PageTitle';
 import { router } from '@inertiajs/react';
 import React, { useState } from 'react';
 
@@ -22,7 +23,7 @@ export default function Pizzas({ pizzas, nameFilter: currentNameFilter, priceFro
             <Head title="Pizzas" />
             <Navbar />
 
-            <form onSubmit={handleFilter} className="mb-4 filter-form d-flex gap-3 justify-content-center p-3">
+            <form onSubmit={handleFilter} className="filter-form d-flex gap-3 justify-content-center p-3  wow animate__animated animate__fadeIn">
                 <div className="form-group">
                     <input
                         type="text"
@@ -73,6 +74,8 @@ export default function Pizzas({ pizzas, nameFilter: currentNameFilter, priceFro
                     Szűrés
                 </button>
             </form>
+
+            <PageTitle title="Pizzáink" image="pizzas" />
 
             <PizzaList pizzas={pizzas} />
             <Footer />

@@ -6,14 +6,18 @@ import PageTitle from '../Components/PageTitle';
 import { router } from '@inertiajs/react';
 import React, { useState } from 'react';
 
-export default function Cart({ cartItems, total }) {
+export default function Contact() {
 
     return (
         <>
-            <Head title="Kosár" />
+            <Head title="Kapcsolat" />
             <Navbar />
-            <PageTitle title="Kosár" image="cart" />
-            <CartItems cartItems={cartItems} total={total} />
+            <PageTitle title="Kapcsolat" />
+            
+            <div className="d-flex flex-column justify-content-center align-items-lg-start align-items-lg-center">
+                Címünk: 1213 Budapest
+            </div>
+
             <Footer />
         </>
     );

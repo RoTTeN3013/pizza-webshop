@@ -18,12 +18,44 @@ class CartController extends Controller
         $id = (int) $request->input('pizzaID');
         //Egyedi azonosító a tömbön, az ugyanolyan de más méretű pizzáknak, ez mindenképp egyedi lesz
         $index = $id + (int)$size;
+        $added = false;
+
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$index])) {
+            $added = true;
+        } else {
+            $cart[$index] = [
+                'index' => $index, //array_values átrendezi az indexelést így nyomon tudom követni
+                'pizza' => $id,
+                'quantity' => $quantity,
+                'size' => $size,
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        return response()->json([
+            'status' => 200,
+            'added' => $added
+        ]);
+    }
+
+    public function addToCartConfirm(Request $request)
+    {
+        $quantity = (int) $request->input('quantity');
+        $size = $request->input('size');
+        $id = (int) $request->input('pizzaID');
+        //Egyedi azonosító a tömbön, az ugyanolyan de más méretű pizzáknak, ez mindenképp egyedi lesz
+        $index = $id + (int)$size;
+        $msg = "";
 
         $cart = session()->get('cart', []);
 
         if (isset($cart[$index])) {
             $cart[$index]['quantity'] += $quantity;
         } else {
+            //Ha bármilyen okból kifolyólag nem létezne mégsem, biztonság kedvéért
             $cart[$index] = [
                 'index' => $index, //array_values átrendezi az indexelést így nyomon tudom követni
                 'pizza' => $id,
