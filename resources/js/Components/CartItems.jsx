@@ -28,33 +28,35 @@ const CartItems = ({ cartItems, total }) => {
     <div className="p-4">
       <div className="d-flex container-fluid justify-content-center content wow animate__animated animate__backInRight" style={{ animationDuration: "1.5s" }}>
         <div className="px-5 d-flex flex-column align-items-center gap-4 col-8">
-          {cartItemList.map((item) => (
-            <div key={item.index} className="d-flex justify-content-between align-items-center cart_item_container w-100">
+          {cartItemList.length > 0 ? (
+            cartItemList.map((item) => (
+              <div key={item.index} className="d-flex justify-content-between align-items-center cart_item_container w-100">
 
-                <p className="fs-6 p-0 m-0">{item.name} {item.size}" - {item.price} Ft</p>  
-                <div className="d-flex gap-3 align-items-center">
-                    <button className="btn btn-dark"
-                      onClick={() => {
-                        if((item.quantity) > 0) {
-                          handleUpdateCart(item.index, item.quantity - 1);
-                        }
-                      }}
-                    >
-                    <i className="fa fa-minus"></i>
-                    </button>
-                    <p className="text-dark p-0 m-0">{item.quantity}</p>
-                    <button className="btn btn-dark"
-                      onClick={() => {
-                        handleUpdateCart(item.index, item.quantity + 1);
-                      }}
-                    >
-                    <i className="fa fa-plus"></i>
-                    </button>
-                  </div>
-                  
-            </div>
-            
-          ))}
+                  <p className="fs-6 p-0 m-0">{item.name} {item.size}" - {item.price} Ft</p>  
+                  <div className="d-flex gap-3 align-items-center">
+                      <button className="btn btn-dark"
+                        onClick={() => {
+                          if((item.quantity) > 0) {
+                            handleUpdateCart(item.index, item.quantity - 1);
+                          }
+                        }}
+                      >
+                      <i className="fa fa-minus"></i>
+                      </button>
+                      <p className="text-dark p-0 m-0">{item.quantity}</p>
+                      <button className="btn btn-dark"
+                        onClick={() => {
+                          handleUpdateCart(item.index, item.quantity + 1);
+                        }}
+                      >
+                      <i className="fa fa-plus"></i>
+                      </button>
+                    </div>
+              </div>
+            ))
+          ) : (
+            <p className="text-center fs-3">A kosár tartalma üres!</p>
+          )}
         </div>
         <div className="d-flex flex-column col-4 gap-4">
           <div className="cart_total_container d-flex justify-content-start align-items-center p-3 bg-dark text-white">

@@ -12,7 +12,7 @@ export default function Contact() {
         <>
             <Head title="Kapcsolat" />
             <Navbar />
-            <PageTitle title="Kapcsolat" />
+            <PageTitle title="Kapcsolat" image="contact"/>
             
             <div className="d-flex flex-column justify-content-center align-items-lg-start align-items-lg-center">
                 Címünk: 1213 Budapest

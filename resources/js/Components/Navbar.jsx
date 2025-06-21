@@ -7,7 +7,7 @@ const Navbar = () => {
         <div className="d-flex gap-3 justify-content-center align-items-center">
           <Link href="/" className="nav-link">Kezdőoldal</Link>
           <Link href="/pizzas" className="nav-link">Pizzák</Link>
-          <Link href="/" className="nav-link">Kapcsolat</Link>
+          <Link href="/contact" className="nav-link">Kapcsolat</Link>
         </div>
         <div className="d-flex justify-content-center align-items-center">
           <Link href="/cart" className="nav-link"><i className="fa fa-shopping-cart"></i> Kosár</Link>
