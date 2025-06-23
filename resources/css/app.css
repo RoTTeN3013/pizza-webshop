@@ -89,7 +89,7 @@ select option {
 }
 
 .content {
-    padding-bottom: 60px;
+    padding-bottom: 80px;
 }
 
 .cart_item_container {
@@ -195,5 +195,15 @@ select option {
     background-color: rgba(0,0,0,0.8);
     padding: 10px 30px;
     border-radius: 5px;
+    color: white;
+}
+
+.contact-form * .form-control {
+    color: black !important;
+}
+
+.error-box {
+    background-color: rgba(206, 39, 39, 0.5);
+    padding: 10px 20px;
     color: white;
 }

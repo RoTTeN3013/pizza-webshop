@@ -1,20 +1,20 @@
 import { Head, Link } from '@inertiajs/react';
-import Navbar from '../Components/Navbar';
-import Footer from '../Components/Footer';
 import CartItems from '../Components/CartItems';
 import PageTitle from '../Components/PageTitle';
 import { router } from '@inertiajs/react';
 import React, { useState } from 'react';
+import BaseLayout from '../Layouts/BaseLayout';
 
 export default function Cart({ cartItems, total }) {
 
     return (
         <>
             <Head title="Kosár" />
-            <Navbar />
-            <PageTitle title="Kosár" image="cart" />
-            <CartItems cartItems={cartItems} total={total} />
-            <Footer />
+
+            <BaseLayout>
+                <PageTitle title="Kosár" image="cart" />
+                <CartItems cartItems={cartItems} total={total} />
+            </BaseLayout>
         </>
     );
 }
