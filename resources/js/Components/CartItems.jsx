@@ -69,7 +69,9 @@ const CartItems = ({ cartItems, total }) => {
           </div>
           <div className="d-flex gap-2 justify-content-end">
             <Link className="btn btn-dark" href="/pizzas"><i className="fa fa-shopping-cart"></i> Vásárlás folytatása</Link>
-            <Link className="btn btn-dark" href="/order-confirmation"><i className="fa fa-credit-card"></i> Tovább a fizetéshez</Link>
+            {cartItemList.length > 0 && (
+              <Link className="btn btn-dark" href="/order-confirmation"><i className="fa fa-credit-card"></i> Tovább a fizetéshez</Link>
+            )}
           </div>
         </div>
       </div>
