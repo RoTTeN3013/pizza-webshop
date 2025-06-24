@@ -86,9 +86,10 @@ const PizzaList = ({ pizzas }) => {
         <div className="container-fluid  d-flex flex-column align-items-center gap-4 content">
           {pizzas.data.map((pizza, index) => (
             <div key={pizza.id} className="pizza-box d-flex flex-column flex-lg-row justify-content-lg-between align-items-center wow animate__animated animate__fadeInUp" style={{ animationDelay: index + 's' }}>
-              <img src="/images/pizzas/pizza.png" alt="{pizza.name}" className="pizza_image" />
+              <img src={`/images/pizzas/${pizza.img_path}`} alt="{pizza.name}" className="pizza_image" />
               <div className="d-flex flex-column align-items-lg-end align-items-center gap-4 col-lg-4 col-12">
-                <h3>{pizza.name} - {pizza.price}Ft</h3>
+                <h3 className="p-0 m-0">{pizza.name} - {pizza.price}Ft</h3>
+                <p className="p-0 m-0 text-end">{pizza.description}</p>
                 
                 <div className="container p-0 d-flex gap-3 justify-content-lg-end justify-content-center">
                   {JSON.parse(pizza.toppings).map((topping, index) => (
@@ -172,3 +173,6 @@ const PizzaList = ({ pizzas }) => {
 };
 
 export default PizzaList;
+
+
+

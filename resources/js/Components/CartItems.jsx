@@ -26,8 +26,8 @@ const CartItems = ({ cartItems, total }) => {
 
   return (
     <div className="p-4">
-      <div className="d-flex container-fluid justify-content-center content wow animate__animated animate__backInRight" style={{ animationDuration: "1.5s" }}>
-        <div className="px-5 d-flex flex-column align-items-center gap-4 col-8">
+      <div className="d-flex flex-lg-row flex-column container-fluid justify-content-center align-items-center align-items-lg-start content wow animate__animated animate__backInRight" style={{ animationDuration: "1.5s" }}>
+        <div className="p-0 mb-4 mb-lg-0 d-flex flex-column align-items-lg-between align-items-center gap-lg-4 gap-2 col-lg-8 col-12">
           {cartItemList.length > 0 ? (
             cartItemList.map((item) => (
               <div key={item.index} className="d-flex justify-content-between align-items-center cart_item_container w-100">
@@ -51,20 +51,27 @@ const CartItems = ({ cartItems, total }) => {
                       >
                       <i className="fa fa-plus"></i>
                       </button>
+                      <button className="btn btn-dark"
+                        onClick={() => {
+                          handleUpdateCart(item.index, 0);
+                        }}
+                      >
+                      <i className="fa fa-trash"></i>
+                      </button>
                     </div>
               </div>
             ))
           ) : (
-            <p className="text-center fs-3">A kosár tartalma üres!</p>
+            <p className="text-left fs-3 p-0 m-0">A kosarad jelenleg üres!</p>
           )}
         </div>
-        <div className="d-flex flex-column col-4 gap-4">
+        <div className="d-flex flex-column col-lg-4 col-12 gap-4 align-items-center align-items-lg-end">
           <div className="cart_total_container d-flex justify-content-start align-items-center p-3 bg-dark text-white">
               <p className="total-price fs-5 p-0 m-0">Kosár végösszege: {totalPrice}Ft</p> 
           </div>
           <div className="d-flex gap-2 justify-content-end">
             <Link className="btn btn-dark" href="/pizzas"><i className="fa fa-shopping-cart"></i> Vásárlás folytatása</Link>
-            <button className="btn btn-dark"><i className="fa fa-credit-card"></i> Tovább a fizetéshez</button>
+            <Link className="btn btn-dark" href="/order-confirmation"><i className="fa fa-credit-card"></i> Tovább a fizetéshez</Link>
           </div>
         </div>
       </div>

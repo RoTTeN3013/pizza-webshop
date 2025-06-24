@@ -17,6 +17,7 @@ class PizzaController extends Controller
         $price_from = $request->query('priceFrom');
         $price_to = $request->query('priceTo');
         $pop_filter = $request->query('popularityFilter');
+        $price_filter = $request->query('byPriceFilter');
         $keyword_filter = $request->query('keyword');
 
             //Névre és/vagy kulcsszóra való szűrés
@@ -46,14 +47,23 @@ class PizzaController extends Controller
                 }
             }
 
+            if ($price_filter) {
+                if($price_filter == 1) {
+                    $query->orderBy('price', 'ASC');
+                }else {
+                    $query->orderBy('price', 'DESC');
+                }
+            }
+
             if ($keyword_filter) {
                 //Mivel json-ben van tárolva így először encode szükséges az összehasonlításhoz
                 $keywords = json_encode($keyword_filter);
                 $query->where('keywords', 'like', '%' . $keywords . '%');
             }
 
-            $pizzas = $query->paginate(5);
-        
+            
+        $pizzas = $query->paginate(5);
+
         return Inertia::render('Pizzas', [
             'pizzas'            => $pizzas,
             'nameFilter'        => $name_filter,
@@ -61,6 +71,7 @@ class PizzaController extends Controller
             'priceTo'           => $price_to,
             'popularityFilter'  => $pop_filter,
             'keyword'           => $keyword_filter,
+            'byPrice'           => $price_filter,
         ]);
     }
 }

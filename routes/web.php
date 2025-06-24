@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -8,6 +7,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -20,3 +20,6 @@ Route::get('/cart', [CartController::class, 'showCart']);
 Route::post('/update-cart', [CartController::class, 'updateCart']);
 Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/send-contact-email', [ContactController::class, 'sendContactEmail']);
+Route::get('/order-confirmation', [OrderController::class, 'index']);
+Route::post('/confirm-order', [OrderController::class, 'confirmOrder']);
+Route::get('/confirm-page', [OrderController::class, 'showConfirmPage']);

@@ -5,16 +5,17 @@ import PageTitle from '../Components/PageTitle';
 import { router } from '@inertiajs/react';
 import React, { useState } from 'react';
 
-export default function Pizzas({ pizzas, nameFilter: currentNameFilter, priceFrom: currentPriceFrom, priceTo: currentPriceTo, popularityFilter: currentPopularityFilter, keyword: currentKeyword }) {
+export default function Pizzas({ pizzas, nameFilter: currentNameFilter, priceFrom: currentPriceFrom, priceTo: currentPriceTo, popularityFilter: currentPopularityFilter, keyword: currentKeyword, byPrice: currentByPrice }) {
     const [nameFilter, setNameFilter] = useState(currentNameFilter || '');
     const [priceFrom, setPriceFrom] = useState(currentPriceFrom || '');
     const [priceTo, setPriceTo] = useState(currentPriceTo || '');
     const [popularityFilter, setPopularityFilter] = useState(currentPopularityFilter || 1);
     const [keyword, setKeyword] = useState(currentKeyword || '');
+    const [byPriceFilter, setByPriceFilter] = useState(currentByPrice || '');
 
     const handleFilter = (e) => {
         e.preventDefault();
-        router.get('/pizzas', { nameFilter, priceFrom, priceTo, popularityFilter, keyword }, { preserveScroll: true });
+        router.get('/pizzas', { nameFilter, priceFrom, priceTo, popularityFilter, keyword, byPriceFilter }, { preserveScroll: true });
     };
 
     return (
@@ -22,7 +23,7 @@ export default function Pizzas({ pizzas, nameFilter: currentNameFilter, priceFro
             <Head title="Pizzas" />
             <BaseLayout>
 
-            <form onSubmit={handleFilter} className="filter-form d-flex gap-3 justify-content-center p-3  wow animate__animated animate__fadeIn">
+            <form onSubmit={handleFilter} className="filter-form d-flex flex-lg-row flex-column gap-3 justify-content-center p-3  wow animate__animated animate__fadeIn">
                 <div className="form-group">
                     <input
                         type="text"
@@ -56,8 +57,20 @@ export default function Pizzas({ pizzas, nameFilter: currentNameFilter, priceFro
                         onChange={e => setPopularityFilter(e.target.value)}
                         className="form-control"
                         >
+                        <option value="0">---! Népszerűség szerinti rendezés !---</option>
                         <option value="1">Népszerűek elől</option>
                         <option value="2">Népszerűek hátul</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <select 
+                        value={byPriceFilter}
+                        onChange={e => setByPriceFilter(e.target.value)}
+                        className="form-control"
+                        >
+                        <option value="0">---! Ár szerinti rendezés !---</option>
+                        <option value="1">Ár szerint növekvő</option>
+                        <option value="2">Ár szerint csökkenő</option>
                     </select>
                 </div>
                 <div className="form-group">
