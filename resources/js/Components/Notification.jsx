@@ -1,5 +1,7 @@
 import React from 'react'
 
+//status show vagy '' mindenképp megkapja class-ként
+
 const Notification = ({status, message}) => {
   return (
     <div className={`${status} d-flex justify-content-center align-items-center notification_container `}>

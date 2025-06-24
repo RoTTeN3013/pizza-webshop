@@ -1,6 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import BaseLayout from '../Layouts/BaseLayout';
-import PageTitle from '../Components/PageTitle';
+import Header from '../Components/Header';
 
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
@@ -8,7 +8,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         <>
             <Head title="Kezdőoldal" />
             <BaseLayout>
-                <PageTitle title="PizzaWebshop" image="Welcome" />
+                <Header title="PizzaWebshop" image="Welcome" />
                 <div className="content d-flex align-items-center flex-column">
                     <div className="article-container d-flex flex-column align-items-center justify-content-center mt-5 mb-2 px-5 wow animate__animated animate__fadeInUp">
                         <h2>Rólunk</h2>

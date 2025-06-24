@@ -1,13 +1,14 @@
 import { Head, Link } from '@inertiajs/react';
 import BaseLayout from '../Layouts/BaseLayout';
 import CartItems from '../Components/CartItems';
-import PageTitle from '../Components/PageTitle';
+import Header from '../Components/Header';
 import Notification from '../Components/Notification';
 import { router } from '@inertiajs/react';
 import React, { useState } from 'react';
 
 export default function Contact() {
 
+    //State változók
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -30,6 +31,7 @@ export default function Contact() {
 
              clearState();
 
+             //Üzenet megjelenítése
              setNotifStatus('show');
              setNotifMessage('Az üzeneted sikeres elküldve! Hamarosan válaszolunk!');
 
@@ -45,6 +47,7 @@ export default function Contact() {
         }
     };
 
+    //State változók nullázása
     const clearState = () => {
         setName('');
         setEmail('');
@@ -59,7 +62,7 @@ export default function Contact() {
             <Head title="Kapcsolat" />
 
             <BaseLayout>
-                <PageTitle title="Kapcsolat" image="contact"/>
+                <Header title="Kapcsolat" image="contact"/>
 
                 <Notification status={notifStatus} message={notifMessage} />
                 

@@ -1,12 +1,13 @@
 import { Head, Link } from '@inertiajs/react';
 import BaseLayout from '../Layouts/BaseLayout';
-import PageTitle from '../Components/PageTitle';
+import Header from '../Components/Header';
 import { router } from '@inertiajs/react';
 import React, { useState } from 'react';
 import Cart from './Cart';
 
 export default function OrderConfirm({cartItems, total}) {
 
+    //State változók
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -32,6 +33,7 @@ export default function OrderConfirm({cartItems, total}) {
                 cartItems
             });
 
+            //Felhasználó átirányítása a megerősítést megjelenítő oldalra, state változók nullázása
             clearState();
             router.get('/confirm-page');
 
@@ -42,6 +44,7 @@ export default function OrderConfirm({cartItems, total}) {
         }
     };
 
+    //State változók nullázása
     const clearState = () => {
         setName('');
         setEmail('');
@@ -61,7 +64,7 @@ export default function OrderConfirm({cartItems, total}) {
             <Head title="Rendelés megerősítése" />
 
             <BaseLayout>
-                <PageTitle title="Rendelés megerősítése" image="order_confirm"/>
+                <Header title="Rendelés megerősítése" image="order_confirm"/>
 
                 <div className="d-flex flex-column align-items-center content mt-5 wow animate__animated animate__fadeInUp">
                     <h3>Rendelés összesítő:</h3>

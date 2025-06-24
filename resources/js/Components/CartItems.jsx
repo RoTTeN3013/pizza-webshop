@@ -8,14 +8,12 @@ const CartItems = ({ cartItems, total }) => {
   const [totalPrice, setTotalPrice] = useState(total);
 
   const handleUpdateCart = async (index, quantity) => {
-
       try {
         const response = await axios.post('/update-cart',  {
           quantity, 
           index,
         });
 
-        console.log(response)
         setCartItems(response.data.cartItems);
         setTotalPrice(response.data.total);
       }

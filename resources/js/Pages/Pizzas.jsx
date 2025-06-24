@@ -1,7 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import BaseLayout from '../Layouts/BaseLayout';
 import PizzaList from '../Components/PizzaList';
-import PageTitle from '../Components/PageTitle';
+import Header from '../Components/Header';
 import { router } from '@inertiajs/react';
 import React, { useState } from 'react';
 
@@ -87,7 +87,7 @@ export default function Pizzas({ pizzas, nameFilter: currentNameFilter, priceFro
                 </button>
             </form>
 
-            <PageTitle title="Pizzáink" image="pizzas" />
+            <Header title="Pizzáink" image="pizzas" />
 
             <PizzaList pizzas={pizzas} />
             </BaseLayout>

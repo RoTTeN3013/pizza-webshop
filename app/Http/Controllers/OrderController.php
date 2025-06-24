@@ -15,6 +15,7 @@ use Inertia\Inertia;
 class OrderController extends Controller
 {
     public function index() {
+        //A kosár jelenlegi állapota (termékek) session változóban elmentve
         $total = 0;
         $cart_items = session()->get('cart', []);
 
@@ -48,6 +49,7 @@ class OrderController extends Controller
 
     public function confirmOrder(Request $request) {
 
+        //Adatok validálása (sima json respond-ot kapunk vissza ha error-ba ütközik a validator)
         $data = $request->validate(
             [
             'name' => 'required|string|min:3|max:125',
@@ -95,6 +97,7 @@ class OrderController extends Controller
     }
 
     public function showCOnfirmPage() {
+        //Csak abban az esetben látogatható, ha a session változó 'order_confirmed' létezik és true
         if(session()->get('order_confirmed') == true) {
             session()->forget('order_confirmed');
             return Inertia::render('ConfirmPage');

@@ -13,13 +13,15 @@ class CartController extends Controller
     //Pizza hozzáadása a kosárhoz
     public function addToCart(Request $request)
     {
+        //Adatok kinyerése
         $quantity = (int) $request->input('quantity');
         $size = $request->input('size');
         $id = (int) $request->input('pizzaID');
-        //Egyedi azonosító a tömbön, az ugyanolyan de más méretű pizzáknak, ez mindenképp egyedi lesz
+        //Egyedi azonosító a tömbön, az ugyanolyan de más méretű pizzáknak, ez mindenképp egyedi lesz pl: pizzaID = 1, size = 24, id = 1+24 (25)
         $index = $id + (int)$size;
-        $added = false;
+        $added = false; //Ellenőrzés céljából, hozzá lett - e már adva (view-ban fontos response-ban)
 
+        //Kosár lekérdezése, kinyerése session-ből (vagy üres tömb létrehozása)
         $cart = session()->get('cart', []);
 
         if (isset($cart[$index])) {
@@ -33,6 +35,7 @@ class CartController extends Controller
             ];
         }
 
+        //Session változó update
         session()->put('cart', $cart);
 
         return response()->json([
@@ -43,6 +46,7 @@ class CartController extends Controller
 
     public function addToCartConfirm(Request $request)
     {
+        //Adatok kinyerése
         $quantity = (int) $request->input('quantity');
         $size = $request->input('size');
         $id = (int) $request->input('pizzaID');
@@ -50,9 +54,10 @@ class CartController extends Controller
         $index = $id + (int)$size;
         $msg = "";
 
+         //Kosár lekérdezése, kinyerése session-ből (vagy üres tömb létrehozása)
         $cart = session()->get('cart', []);
 
-        if (isset($cart[$index])) {
+        if (isset($cart[$index])) { //Amennyiben valóban létezik a tömb ezen eleme, a mennyiség növeljük
             $cart[$index]['quantity'] += $quantity;
         } else {
             //Ha bármilyen okból kifolyólag nem létezne mégsem, biztonság kedvéért
@@ -64,6 +69,7 @@ class CartController extends Controller
             ];
         }
 
+        //Session változó update (kosár)
         session()->put('cart', $cart);
 
         return response()->json([

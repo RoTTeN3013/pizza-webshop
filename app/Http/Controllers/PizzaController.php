@@ -61,7 +61,7 @@ class PizzaController extends Controller
                 $query->where('keywords', 'like', '%' . $keywords . '%');
             }
 
-            
+        //5 darabonkénti lapozó
         $pizzas = $query->paginate(5);
 
         return Inertia::render('Pizzas', [
